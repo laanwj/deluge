@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # deluge/ui/web/server.py
 #
@@ -97,10 +98,13 @@ CONFIG_DEFAULTS = {
     "show_sidebar": True,
     "theme": "gray",
     "first_login": True,
+    "auto_login": False,
+    "auto_connect": False,
 
     # Server Settings
     "base": "/",
     "port": 8112,
+    "interface": "",
     "https": False,
     "pkey": "ssl/daemon.pkey",
     "cert": "ssl/daemon.cert"
@@ -108,7 +112,8 @@ CONFIG_DEFAULTS = {
 
 UI_CONFIG_KEYS = (
     "theme", "sidebar_show_zero", "sidebar_multiple_filters",
-    "show_session_speed", "base", "first_login"
+    "show_session_speed", "base", "first_login", "auto_login",
+    "auto_connect"
 )
 
 OLD_CONFIG_KEYS = (
@@ -593,6 +598,12 @@ class ServerContextFactory:
         ctx.use_certificate_chain_file(configmanager.get_config_dir(deluge_web.cert))
         return ctx
 
+class RootLevel(resource.Resource):
+    '''Real root-level resource, alias deluge under /deluge.'''
+    def __init__(self):
+        resource.Resource.__init__(self)
+        self.putChild("deluge", TopLevel())
+
 class DelugeWeb(component.Component):
 
     def __init__(self):
@@ -626,9 +637,10 @@ class DelugeWeb(component.Component):
                     del old_config
 
         self.socket = None
-        self.top_level = TopLevel()
+        self.top_level = RootLevel()
         self.site = server.Site(self.top_level)
         self.port = self.config["port"]
+        self.interface = self.config["interface"] or "0.0.0.0"
         self.https = self.config["https"]
         self.pkey = self.config["pkey"]
         self.cert = self.config["cert"]
@@ -670,14 +682,14 @@ class DelugeWeb(component.Component):
             reactor.run()
 
     def start_normal(self):
-        self.socket = reactor.listenTCP(self.port, self.site)
-        log.info("serving on %s:%s view at http://127.0.0.1:%s", "0.0.0.0",
+        self.socket = reactor.listenTCP(self.port, self.site, interface=self.interface)
+        log.info("serving on %s:%s view at http://127.0.0.1:%s", self.interface,
             self.port, self.port)
 
     def start_ssl(self):
         check_ssl_keys()
-        self.socket = reactor.listenSSL(self.port, self.site, ServerContextFactory())
-        log.info("serving on %s:%s view at https://127.0.0.1:%s", "0.0.0.0",
+        self.socket = reactor.listenSSL(self.port, self.site, ServerContextFactory(), interface=self.interface)
+        log.info("serving on %s:%s view at https://127.0.0.1:%s", self.interface,
             self.port, self.port)
 
     def stop(self):
@@ -710,5 +722,7 @@ if __name__ == "__builtin__":
     i = internet.TCPServer(deluge_web.port, deluge_web.site)
     i.setServiceParent(sc)
 elif __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG)
+
     deluge_web = DelugeWeb()
     deluge_web.start()

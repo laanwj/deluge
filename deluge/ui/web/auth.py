@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # deluge/ui/web/auth.py
 #
@@ -60,6 +61,7 @@ from twisted.internet.task import LoopingCall
 from deluge import component
 from deluge.ui.web.json_api import JSONComponent, export
 from deluge.common import utf8_encoded
+from deluge.ui.web.auth_config import remote_methods_access
 
 log = logging.getLogger(__name__)
 
@@ -103,6 +105,7 @@ class Auth(JSONComponent):
         super(Auth, self).__init__("Auth")
         self.worker = LoopingCall(self._clean_sessions)
         self.worker.start(5)
+        self.remote_methods_access = remote_methods_access
 
     def _clean_sessions(self):
         config = component.get("DelugeWeb").config
@@ -151,7 +154,7 @@ class Auth(JSONComponent):
 
         config["sessions"][session_id] = {
             "login": login,
-            "level": AUTH_LEVEL_ADMIN,
+            "level": AUTH_LEVEL_NORMAL,
             "expires": expires
         }
         return True
@@ -223,7 +226,6 @@ class Auth(JSONComponent):
 
         :raises: Exception
         """
-
         config = component.get("DelugeWeb").config
         session_id = get_session_id(request.getCookie("_session_id"))
 
@@ -240,7 +242,14 @@ class Auth(JSONComponent):
             request.addCookie('_session_id', _session_id,
                     path=request.base+"json", expires=expires_str)
 
-        if method:
+        if isinstance(method, basestring): # Method name
+            try:
+                level = self.remote_methods_access[method]
+            except KeyError:
+                log.error("Remote method "+method+" not present")
+                raise Exception("Remote method "+method+" not allowed")
+
+        elif method is not None: # Method object
             if not hasattr(method, "_json_export"):
                 raise Exception("Not an exported method")
 

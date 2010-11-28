@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # deluge/ui/web/json_api.py
 #
@@ -58,6 +59,7 @@ from deluge.ui.coreconfig import CoreConfig
 from deluge.ui.sessionproxy import SessionProxy
 
 from deluge.ui.web.common import _, compress
+from deluge.ui.web.auth import AUTH_LEVEL_ADMIN
 json = common.json
 
 log = logging.getLogger(__name__)
@@ -192,7 +194,7 @@ class JSON(resource.Resource, component.Component):
         """
         Executes methods using the Deluge client.
         """
-        component.get("Auth").check_request(request, level=AUTH_LEVEL_DEFAULT)
+        component.get("Auth").check_request(request, method, level=AUTH_LEVEL_DEFAULT)
         core_component, method = method.split(".")
         return getattr(getattr(client, core_component), method)(*params)
 
@@ -472,6 +474,7 @@ class WebApi(JSONComponent):
         host = self.get_host(host_id)
         if host:
             self._json.connect(*host[1:]).addCallback(on_connected)
+
         return d
 
     @export
@@ -833,14 +836,14 @@ class WebApi(JSONComponent):
                 ).addCallback(on_connect, c, host_id
                 ).addErrback(on_connect_failed, host_id)
 
-    @export
+    @export(AUTH_LEVEL_ADMIN)
     def start_daemon(self, port):
         """
     Starts a local daemon.
     """
         client.start_daemon(port, get_config_dir())
 
-    @export
+    @export(AUTH_LEVEL_ADMIN)
     def stop_daemon(self, host_id):
         """
         Stops a running daemon.
@@ -874,7 +877,7 @@ class WebApi(JSONComponent):
             main_deferred.callback((False, "An error occurred"))
         return main_deferred
 
-    @export
+    @export(AUTH_LEVEL_ADMIN)
     def add_host(self, host, port, username="", password=""):
         """
         Adds a host to the list.
@@ -907,7 +910,7 @@ class WebApi(JSONComponent):
         self.host_list.save()
         return (True,)
 
-    @export
+    @export(AUTH_LEVEL_ADMIN)
     def remove_host(self, connection_id):
         """
         Removes a host for the list
@@ -946,6 +949,7 @@ class WebApi(JSONComponent):
         :type config: dictionary
         """
         web_config = component.get("DelugeWeb").config
+
         for key in config.keys():
             if isinstance(config[key], unicode) or isinstance(config[key], str):
                 config[key] = config[key].encode("utf8")
@@ -966,7 +970,7 @@ class WebApi(JSONComponent):
     def get_plugin_resources(self, name):
         return component.get("Web.PluginManager").get_plugin_resources(name)
 
-    @export
+    @export(AUTH_LEVEL_ADMIN)
     def upload_plugin(self, filename, path):
         main_deferred = Deferred()
 
