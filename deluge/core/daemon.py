@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # daemon.py
 #
@@ -47,7 +48,7 @@ from deluge.log import LOG as log
 import deluge.error
 
 class Daemon(object):
-    def __init__(self, options=None, args=None, classic=False):
+    def __init__(self, options=None, args=None, classic=False, start_reactor=True):
         # Check for another running instance of the daemon
         if os.path.isfile(deluge.configmanager.get_config_dir("deluged.pid")):
             # Get the PID and the port of the supposedly running daemon
@@ -172,10 +173,12 @@ class Daemon(object):
                 "%s;%s\n" % (os.getpid(), port))
 
             component.start()
-            try:
-                reactor.run()
-            finally:
-                self._shutdown()
+
+            if start_reactor:
+                try:
+                    reactor.run()
+                finally:
+                    self._shutdown()
 
     @export()
     def shutdown(self, *args, **kwargs):
