@@ -271,7 +271,17 @@ Deluge.ConnectionManager = Ext.extend(Ext.Window, {
 
 	// private
 	onLogin: function() {
-		if (deluge.config.first_login) {
+		if(deluge.config.auto_connect)
+		{
+			deluge.client.web.connect(deluge.config.auto_connect, {
+				success: function(methods) {
+					deluge.client.reloadMethods();
+					deluge.client.on('connected', function(e) {
+						deluge.events.fire('connect');
+					}, this, {single: true});
+				}
+			});
+		} else if (deluge.config.first_login) {
 			Ext.MessageBox.confirm('Change password',
 				'As this is your first login, we recommend that you ' +
 				'change your password. Would you like to ' +
