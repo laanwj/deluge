@@ -82,19 +82,19 @@ Deluge.Toolbar = Ext.extend(Ext.Toolbar, {
 					text: _('Down'),
 					iconCls: 'icon-down',
 					handler: this.onTorrentAction
-				},'|',{
+				}, '|',{
 					id: 'preferences',
 					text: _('Preferences'),
 					iconCls: 'x-deluge-preferences',
 					handler: this.onPreferencesClick,
 					scope: this
-				},{
+				}, /*{
 					id: 'connectionman',
 					text: _('Connection Manager'),
 					iconCls: 'x-deluge-connection-manager',
 					handler: this.onConnectionManagerClick,
 					scope: this
-				},'->',{
+				},*/ '->',{
 					id: 'help',
 					iconCls: 'icon-help',
 					text: _('Help'),

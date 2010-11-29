@@ -63,36 +63,44 @@ Deluge.preferences.Downloads = Ext.extend(Ext.FormPanel, {
 			style: 'margin-bottom: 5px; padding-bottom: 5px;'
 		});
 
-		optMan.bind('download_location', fieldset.add({
+		/* optMan.bind('download_location', */ fieldset.add({
 			xtype: 'textfield',
 			name: 'download_location',
+                        value: deluge.config.download_show_location,
 			fieldLabel: _('Download to'),
-			width: 280
-		}));
+			width: 280,
+                        readOnly: true
+		}) /*); */
 
 		var field = fieldset.add({
 			name: 'move_completed_path',
+                        value: deluge.config.move_completed_show_path,
 			fieldLabel: _('Move completed to'),
-			width: 280
+			width: 280,
+                        inputReadOnly: true
 		});
 		optMan.bind('move_completed', field.toggle);
-		optMan.bind('move_completed_path', field.input);
+		//optMan.bind('move_completed_path', field.input);
 
 		field = fieldset.add({
 			name: 'torrentfiles_location',
+                        value: deluge.config.torrentfiles_show_location,
 			fieldLabel: _('Copy of .torrent files to'),
-			width: 280
+			width: 280,
+                        inputReadOnly: true
 		});
 		optMan.bind('copy_torrent_file', field.toggle);
-		optMan.bind('torrentfiles_location', field.input);
+		//optMan.bind('torrentfiles_location', field.input);
 
 		field = fieldset.add({
 			name: 'autoadd_location',
+                        value: deluge.config.autoadd_show_location,
 			fieldLabel: _('Autoadd .torrent files from'),
-			width: 280
+			width: 280,
+                        inputReadOnly: true
 		});
 		optMan.bind('autoadd_enable', field.toggle);
-		optMan.bind('autoadd_location', field.input);
+		//optMan.bind('autoadd_location', field.input);
 	
 		fieldset = this.add({
 			xtype: 'fieldset',

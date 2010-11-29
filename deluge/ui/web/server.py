@@ -107,13 +107,23 @@ CONFIG_DEFAULTS = {
     "interface": "",
     "https": False,
     "pkey": "ssl/daemon.pkey",
-    "cert": "ssl/daemon.cert"
+    "cert": "ssl/daemon.cert",
+
+    # "Show" settings
+    "move_completed_show_path": "/",
+    "torrentfiles_show_location": "/torrents",
+    "autoadd_show_location": "/autoadd",
+    "download_show_location": "/"
 }
 
 UI_CONFIG_KEYS = (
     "theme", "sidebar_show_zero", "sidebar_multiple_filters",
     "show_session_speed", "base", "first_login", "auto_login",
-    "auto_connect"
+    "auto_connect",
+    "move_completed_show_path",
+    "torrentfiles_show_location",
+    "autoadd_show_location",
+    "download_show_location"
 )
 
 OLD_CONFIG_KEYS = (

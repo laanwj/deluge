@@ -105,7 +105,8 @@ Deluge.preferences.Plugins = Ext.extend(Ext.Panel, {
 			region: 'center',
 			autoScroll: true,
 			margins: '5 5 5 5',
-			items: [this.list],
+			items: [this.list]
+                        /*
 			bbar: new Ext.Toolbar({
 				items: [{
 					cls: 'x-btn-text-icon',
@@ -121,6 +122,7 @@ Deluge.preferences.Plugins = Ext.extend(Ext.Panel, {
 					scope: this
 				}]
 			})
+                        */
 		});
 	
 		var pp = this.pluginInfo = this.add({
