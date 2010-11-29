@@ -48,10 +48,12 @@ Ext.ux.form.ToggleField = Ext.extend(Ext.form.Field, {
 		Ext.ux.form.ToggleField.superclass.initComponent.call(this);
 
 		this.toggle = new Ext.form.Checkbox();
-		this.toggle.on('check', this.onToggleCheck, this);
+                this.toggle.on('check', this.onToggleCheck, this);
 
 		this.input = new Ext.form.TextField({
-			disabled: true
+			disabled: true,
+                        value: this.value,
+                        readOnly: this.inputReadOnly
 		});
 	},
 
