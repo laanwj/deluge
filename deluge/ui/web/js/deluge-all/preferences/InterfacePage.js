@@ -77,6 +77,7 @@ Deluge.preferences.Interface = Ext.extend(Ext.form.FormPanel, {
 			labelSeparator: '',
 			boxLabel: _('Allow the use of multiple filters at once')
 		}));
+                /*
 		
 		fieldset = this.add({
 			xtype: 'fieldset',
@@ -172,6 +173,7 @@ Deluge.preferences.Interface = Ext.extend(Ext.form.FormPanel, {
 			width: 180,
 			fieldLabel: _('Certificate')
 		}));
+               */
 	},
 	
 	onApply: function() {

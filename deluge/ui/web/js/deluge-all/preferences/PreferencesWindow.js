@@ -121,8 +121,8 @@ Deluge.preferences.PreferencesWindow = Ext.extend(Ext.Window, {
 		this.addPage(new Deluge.preferences.Encryption());
 		this.addPage(new Deluge.preferences.Bandwidth());
 		this.addPage(new Deluge.preferences.Interface());
-		this.addPage(new Deluge.preferences.Other());
-		this.addPage(new Deluge.preferences.Daemon());
+		//this.addPage(new Deluge.preferences.Other());
+		//this.addPage(new Deluge.preferences.Daemon());
 		this.addPage(new Deluge.preferences.Queue());
 		this.addPage(new Deluge.preferences.Proxy());
 		this.addPage(new Deluge.preferences.Cache());
