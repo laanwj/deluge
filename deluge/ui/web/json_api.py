@@ -195,7 +195,20 @@ class JSON(resource.Resource, component.Component):
         Executes methods using the Deluge client.
         """
         component.get("Auth").check_request(request, method, level=AUTH_LEVEL_DEFAULT)
+        # Handle special filter of config items
+        if method == "core.set_config":
+            from deluge.ui.web.auth_config import remote_config_access
+            new_config = {}
+            for (key,value) in params[0].iteritems():
+                level = remote_config_access.get(key, AUTH_LEVEL_ADMIN)
+                if level <= request.auth_level:
+                    # if level of config option is lower or equal to users
+                    # level, he may set it.
+                    new_config[key] = value
+            params[0] = new_config
+        #
         core_component, method = method.split(".")
+
         return getattr(getattr(client, core_component), method)(*params)
 
     def _handle_request(self, request):
