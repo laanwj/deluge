@@ -113,7 +113,11 @@ CONFIG_DEFAULTS = {
     "move_completed_show_path": "/",
     "torrentfiles_show_location": "/torrents",
     "autoadd_show_location": "/autoadd",
-    "download_show_location": "/"
+    "download_show_location": "/",
+
+    # port range
+    "port_min": 50000,
+    "port_max": 60000
 }
 
 UI_CONFIG_KEYS = (
@@ -123,7 +127,9 @@ UI_CONFIG_KEYS = (
     "move_completed_show_path",
     "torrentfiles_show_location",
     "autoadd_show_location",
-    "download_show_location"
+    "download_show_location",
+    "port_min",
+    "port_max"
 )
 
 OLD_CONFIG_KEYS = (
