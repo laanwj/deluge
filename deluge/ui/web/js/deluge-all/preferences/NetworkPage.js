@@ -134,7 +134,7 @@ Deluge.preferences.Network = Ext.extend(Ext.form.FormPanel, {
 			}]
 		});
 		optMan.bind('outgoing_ports', this.outgoingPorts);
-		
+		/*
 		fieldset = this.add({
 			xtype: 'fieldset',
 			border: false,
@@ -150,6 +150,7 @@ Deluge.preferences.Network = Ext.extend(Ext.form.FormPanel, {
 			labelSeparator: '',
 			width: 200
 		}));
+                */
 		
 		fieldset = this.add({
 			xtype: 'fieldset',
