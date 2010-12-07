@@ -120,6 +120,15 @@ def find_json_objects(s):
 
     return objects
 
+# Convert string to bool
+str_to_bool = {
+    'true':True,
+    'false':False,
+    'True':True,
+    'False':False,
+    '0':False,
+    '1':True
+}
 
 class Config(object):
     """
@@ -207,9 +216,11 @@ what is currently in the config and it could not convert the value
             try:
                 if oldtype == unicode:
                     value = oldtype(value, "utf8")
+                elif oldtype == bool:
+                    value = str_to_bool[value]
                 else:
                     value = oldtype(value)
-            except ValueError:
+            except (ValueError, KeyError):
                 log.warning("Type '%s' invalid for '%s'", newtype, key)
                 raise
 
