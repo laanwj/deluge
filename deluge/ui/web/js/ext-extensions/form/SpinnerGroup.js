@@ -154,6 +154,7 @@ Ext.ux.form.SpinnerGroup = Ext.extend(Ext.form.CheckboxGroup, {
 
             this.items.each(function(field) {
                 field.on('spin', this.onFieldChange, this);
+                field.on('change', this.onFieldChange, this);
             }, this);
 
 			if (this.lazyValueSet) {

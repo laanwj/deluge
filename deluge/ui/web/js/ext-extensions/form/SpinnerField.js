@@ -16,7 +16,7 @@ Ext.ux.form.SpinnerField = Ext.extend(Ext.form.NumberField, {
 	actionMode: 'wrap',
 	deferHeight: true,
 	autoSize: Ext.emptyFn,
-	onBlur: Ext.emptyFn,
+	//onBlur: Ext.emptyFn,
 	adjustSize: Ext.BoxComponent.prototype.adjustSize,
 
 	constructor: function(config) {
