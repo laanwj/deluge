@@ -91,9 +91,10 @@ Deluge.ConnectionManager = Ext.extend(Ext.Window, {
 
 		this.panel = this.add({
 			autoScroll: true,
-			items: [this.list],
+			items: [ this.list ],
 			bbar: new Ext.Toolbar({
 				buttons: [
+/*
 					{
 						id: 'cm-add',
 						cls: 'x-btn-text-icon',
@@ -118,6 +119,7 @@ Deluge.ConnectionManager = Ext.extend(Ext.Window, {
 						disabled: true,
 						scope: this
 					}
+*/
 				]
 			})
 		});
