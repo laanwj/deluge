@@ -125,10 +125,22 @@ Deluge.preferences.Network = Ext.extend(Ext.form.FormPanel, {
 			},
 			items: [{
 				fieldLabel: 'From',
+                                strategy: {
+                                        xtype: 'number',
+                                        decimalPrecision: 0,
+                                        minValue: deluge.config.port_min,
+                                        maxValue: deluge.config.port_max
+                                },
                                 minValue: deluge.config.port_min,
                                 maxValue: deluge.config.port_max
 			}, {
 				fieldLabel: 'To',
+                                strategy: {
+                                        xtype: 'number',
+                                        decimalPrecision: 0,
+                                        minValue: deluge.config.port_min,
+                                        maxValue: deluge.config.port_max
+                                },
                                 minValue: deluge.config.port_min,
                                 maxValue: deluge.config.port_max
 			}]
