@@ -231,13 +231,13 @@ deluge.menus.torrent = new Ext.menu.Menu({
 		iconCls: 'icon-recheck',
 		handler: deluge.menus.onTorrentAction,
 		scope: deluge.menus
-	}, {
+	}/*, {
 		torrentAction: 'move',
 		text: _('Move Storage'),
 		iconCls: 'icon-move',
 		handler: deluge.menus.onTorrentAction,
 		scope: deluge.menus
-	}]
+	}*/]
 });
 
 deluge.menus.filePriorities = new Ext.menu.Menu({
