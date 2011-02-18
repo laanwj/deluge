@@ -9,7 +9,7 @@ BUILD_DATA="${SOURCE_DIR}/.build_data"
 BUILD_DIR=`dirname $SOURCE_DIR`
 BUILD_DATA_GENERATED=0
 
-YUI_COMPRESSOR=`which yuicompressor`
+YUI_COMPRESSOR=`which yui-compressor`
 BUILD_TYPE="js"
 
 add_file()
