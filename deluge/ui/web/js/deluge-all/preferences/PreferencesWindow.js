@@ -240,6 +240,11 @@ Deluge.preferences.PreferencesWindow = Ext.extend(Ext.Window, {
 	// private
 	onOk: function() {
 		deluge.client.core.set_config(this.optionsManager.getDirty());
+
+		for (var page in this.pages) {
+			if (this.pages[page].onApply) this.pages[page].onApply();
+		}
+
 		this.hide();
 	}
 });

@@ -28,6 +28,10 @@ remote_methods_access = {
     'core.set_torrent_file_priorities': AUTH_LEVEL_NORMAL,
     'core.set_torrent_trackers': AUTH_LEVEL_NORMAL,
     'core.get_torrent_status': AUTH_LEVEL_NORMAL,
+
+    # Scheduler settings
+    'scheduler.set_config': AUTH_LEVEL_NORMAL,
+    'scheduler.get_config': AUTH_LEVEL_NORMAL,
 }
 
 remote_config_access = {
