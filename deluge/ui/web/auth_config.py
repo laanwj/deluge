@@ -16,8 +16,8 @@ remote_methods_access = {
     # Moving files as well
     'core.move_storage': AUTH_LEVEL_ADMIN,
     # Same for plugin ops
-    'core.disable_plugin': AUTH_LEVEL_ADMIN,
-    'core.enable_plugin': AUTH_LEVEL_ADMIN,
+    'core.disable_plugin': AUTH_LEVEL_NORMAL,
+    'core.enable_plugin': AUTH_LEVEL_NORMAL,
 
     # Torrent manipulation is for everyone
     'core.remove_torrent': AUTH_LEVEL_NORMAL,
