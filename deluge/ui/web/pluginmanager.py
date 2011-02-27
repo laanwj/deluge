@@ -146,7 +146,7 @@ class PluginManager(PluginManagerBase, component.Component):
             return
         info = gather_info(plugin)
         info["name"] = name
-        info["scripts"] = ["/js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["scripts"]]
-        info["debug_scripts"] = ["/js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["debug_scripts"]]
+        info["scripts"] = ["js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["scripts"]]
+        info["debug_scripts"] = ["js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["debug_scripts"]]
         del info["script_directories"]
         return info
