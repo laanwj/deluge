@@ -11,3 +11,5 @@ tar -czvf ${XIRVIK_PATH}/js-deluge/deluge-all.tar.gz \
     deluge/ui/web/js/deluge-all-debug.js \
     deluge/ui/web/js/ext-extensions.js \
     deluge/ui/web/js/ext-extensions-debug.js
+
+git bundle create ${XIRVIK_PATH}/bundles/deluge.bundle $ORIG_VERSION..$TO_VERSION
