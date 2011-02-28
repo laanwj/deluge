@@ -254,6 +254,8 @@ Deluge.preferences.Plugins = Ext.extend(Ext.Panel, {
 	},
 
 	onPluginSelect: function(dv, selections) {
+                if(selections.length == 0)
+                        return;
 		var r = dv.getRecords(selections)[0];
 		deluge.client.web.get_plugin_info(r.get('plugin'), {
 			success: this.onGotPluginInfo,
