@@ -535,8 +535,12 @@ Deluge.ux.preferences.SchedulerPage = Ext.extend(Ext.Panel, {
 		this.form.layout.setContainer(this);
 		this.form.doLayout();
 	},
-	
+
 	onApply: function() {
+                if(!this.rendered)
+                {
+                    return;
+                }
 		// build settings object
 		var config = { }
 
