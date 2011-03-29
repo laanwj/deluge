@@ -157,7 +157,7 @@ deluge.ui = {
 	},
 
 	onUpdateError: function(error) {
-		if (this.errorCount == 2) {
+		if (this.errorCount == 15) {
 			Ext.MessageBox.show({
 				title: 'Lost Connection',
 				msg: 'The connection to the webserver has been lost!',
