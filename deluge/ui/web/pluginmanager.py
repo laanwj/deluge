@@ -144,9 +144,10 @@ class PluginManager(PluginManagerBase, component.Component):
         except KeyError:
             log.info("Plugin has no web ui")
             return
+        base = str(component.get("Web").get_config()["base"])
         info = gather_info(plugin)
         info["name"] = name
-        info["scripts"] = ["js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["scripts"]]
-        info["debug_scripts"] = ["js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["debug_scripts"]]
+        info["scripts"] = [base+"js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["scripts"]]
+        info["debug_scripts"] = [base+"js/%s/%s" % (name.lower(), os.path.basename(s)) for s in info["debug_scripts"]]
         del info["script_directories"]
         return info
