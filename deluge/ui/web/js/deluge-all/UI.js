@@ -248,7 +248,7 @@ deluge.ui = {
 		var scripts = (Deluge.debug) ? resources.debug_scripts : resources.scripts;
 		Ext.each(scripts, function(script) {
 			Ext.ux.JSLoader({
-				url: deluge.config.base + script,
+				url: script,
 				onLoad: this.onPluginLoaded,
 				pluginName: resources.name
 			});
