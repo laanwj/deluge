@@ -284,7 +284,7 @@ class FilterTreeView(component.Component):
         if pix:
             try:
                 return gtk.gdk.pixbuf_new_from_file(deluge.common.get_pixmap("%s16.png" % pix))
-            except glib.GError as e:
+            except glib.GError,e:
                 log.warning(e)
         return self.get_transparent_pix(16, 16)
 
