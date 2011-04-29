@@ -111,7 +111,31 @@ deluge.ui = {
 		Ext.QuickTips.init();
 
 		deluge.client.on('connected', function(e) {
-			deluge.login.show();
+                    if(deluge.config.auto_login)
+                    {
+                        // Bypass login screen
+                        deluge.client.auth.login(deluge.config.auto_login, {
+                            success: function(result) {
+                                if (result) {
+                                    deluge.events.fire('login');
+                                } else {
+                                    Ext.MessageBox.show({
+                                            title: _('Login Failed'),
+                                            msg: _('Login Failed'),
+                                            buttons: Ext.MessageBox.OK,
+                                            modal: false,
+                                            icon: Ext.MessageBox.WARNING,
+                                            iconCls: 'x-deluge-icon-warning'
+                                    });
+                                }
+                            },
+                            scope: this
+                        });
+                    }
+                    else
+                    {
+                        deluge.login.show();
+                    }
 		}, this, {single: true});
 
 		this.update = this.update.createDelegate(this);
