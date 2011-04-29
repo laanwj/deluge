@@ -149,10 +149,5 @@ Deluge.LoginWindow = Ext.extend(Ext.Window, {
 	
 	onShow: function() {
 		this.passwordField.focus(true, true);
-		if(deluge.config.auto_login)
-		{
-			this.passwordField.setRawValue(deluge.config.auto_login);
-			this.onLogin();
-		}
 	}
 });
