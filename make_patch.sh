@@ -1,9 +1,11 @@
 #!/bin/bash
 XIRVIK_PATH="/home/orion/projects/rentacoder/xirvik"
 ORIG_VERSION="deluge-1.3.1"
-TO_VERSION="wumpus"
+TO_VERSION="new"
 
 git diff $ORIG_VERSION $TO_VERSION > ${XIRVIK_PATH}/patches-deluge/deluge.patch
+rm -f deluge/ui/web/js/deluge-all/.build_data
+rm -f deluge/ui/web/js/ext-extensions/.build_data
 ( cd deluge/ui/web; bash build js/deluge-all )
 ( cd deluge/ui/web; bash build js/ext-extensions )
 tar -czvf ${XIRVIK_PATH}/js-deluge/deluge-all.tar.gz \
