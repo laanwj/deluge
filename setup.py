@@ -167,7 +167,8 @@ else:
         'boost_thread',
         'pthread',
         'ssl',
-        'z'
+        'z',
+        'rt'
         ]
 
     if not windows_check():
