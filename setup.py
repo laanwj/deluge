@@ -166,9 +166,11 @@ else:
         'boost_iostreams',
         'boost_python',
         'boost_thread',
+        'boost_system',
         'pthread',
         'ssl',
-        'z'
+        'z',
+        'rt'
         ]
 
     if not windows_check():
