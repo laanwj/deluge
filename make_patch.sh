@@ -1,7 +1,7 @@
 #!/bin/bash
 XIRVIK_PATH="/home/orion/projects/rentacoder/xirvik"
-ORIG_VERSION="deluge-1.3.1"
-TO_VERSION="new"
+ORIG_VERSION="deluge-1.3.5"
+TO_VERSION="master"
 
 git diff $ORIG_VERSION $TO_VERSION > ${XIRVIK_PATH}/patches-deluge/deluge.patch
 rm -f deluge/ui/web/js/deluge-all/.build_data
