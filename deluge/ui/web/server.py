@@ -620,6 +620,25 @@ class RootLevel(resource.Resource):
         resource.Resource.__init__(self)
         self.putChild("deluge", TopLevel())
 
+    def getChildWithDefault(self, path, request):
+        # Calculate the request base
+        header = request.getHeader('x-deluge-base')
+        base = header if header else component.get("DelugeWeb").base
+
+        # validate the base parameter
+        if not base:
+            base = '/'
+
+        if base[0] != '/':
+            base = '/' + base
+
+        if base[-1] != '/':
+            base += '/'
+
+        request.base = base.encode('idna')
+
+        return resource.Resource.getChildWithDefault(self, path, request)
+
 class DelugeWeb(component.Component):
 
     def __init__(self):
