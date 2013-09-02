@@ -75,7 +75,7 @@ remote_config_access = {
   "listen_ports": AUTH_LEVEL_NORMAL,
   "max_connections_per_torrent": AUTH_LEVEL_NORMAL,
   "del_copy_torrent_file": AUTH_LEVEL_NORMAL,
-  "move_completed": AUTH_LEVEL_ADMIN,
+  "move_completed": AUTH_LEVEL_NORMAL,
   "autoadd_enable": AUTH_LEVEL_NORMAL,
   "proxies": AUTH_LEVEL_NORMAL,
   "dont_count_slow_torrents": AUTH_LEVEL_NORMAL,
